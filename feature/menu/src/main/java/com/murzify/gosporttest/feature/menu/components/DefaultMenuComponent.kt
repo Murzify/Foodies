@@ -1,0 +1,87 @@
+package com.murzify.gosporttest.feature.menu.components
+
+import androidx.compose.runtime.Composable
+import com.arkivanov.decompose.ComponentContext
+import com.murzify.gosporttest.core.common.componentCoroutineScope
+import com.murzify.gosporttest.core.domain.model.Category
+import com.murzify.gosporttest.core.domain.model.Meal
+import com.murzify.gosporttest.core.domain.repository.MealRepository
+import com.murzify.gosporttest.feature.menu.ui.MenuUi
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+
+class DefaultMenuComponent @AssistedInject constructor(
+    @Assisted componentContext: ComponentContext,
+    private val mealRepository: MealRepository
+): MenuComponent, ComponentContext by componentContext {
+
+    override val categories = MutableStateFlow<List<Category>>(emptyList())
+    override val selectedCategory = MutableStateFlow<Category?>(null)
+    override val meals = MutableStateFlow<List<Meal>>(emptyList())
+    override val showProgress = MutableStateFlow(false)
+
+    private val scope = componentContext.componentCoroutineScope()
+
+    init {
+        scope.launch(Dispatchers.IO) {
+            mealRepository.loadMeals()
+        }
+
+        scope.launch(Dispatchers.IO) {
+            mealRepository.loadCategories()
+        }
+
+        scope.launch(Dispatchers.IO) {
+            mealRepository.getCategories().collect {
+                categories.value = it
+                selectedCategory.value = it.firstOrNull()
+            }
+        }
+
+        var mealsJob: Job? = null
+        scope.launch(Dispatchers.IO) {
+            selectedCategory.collect { category ->
+                mealsJob?.cancel()
+                mealsJob = category?.collectMeals()
+            }
+        }
+
+        scope.launch {
+            meals.collect {
+                showProgress.value = it.isEmpty()
+            }
+        }
+
+    }
+
+    private fun Category.collectMeals() = scope.launch(Dispatchers.IO) {
+        mealRepository.getMealsByCategory(this@collectMeals).collect { newMeals ->
+            meals.value = newMeals
+        }
+    }
+
+    override fun selectCategory(category: Category) {
+        selectedCategory.value = category
+    }
+
+    @Composable
+    override fun Render() {
+        MenuUi(this)
+    }
+
+    @AssistedFactory
+    interface Factory : MenuComponent.Factory {
+        override fun invoke(
+            componentContext: ComponentContext
+        ): DefaultMenuComponent
+    }
+
+}
