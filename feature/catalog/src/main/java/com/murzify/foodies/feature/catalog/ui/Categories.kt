@@ -40,8 +40,8 @@ internal fun Categories(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
                 .scrollable(rememberScrollState(), orientation = Orientation.Horizontal)
-                .background(Color.White)
                 .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
+                .background(MaterialTheme.colorScheme.background)
         ) {
             repeat(8) {
                 CategoryPlaceholder()

@@ -21,19 +21,14 @@ internal fun MenuUi(component: MenuComponent) {
 
     Column {
         CustomToolbar()
+        Categories(
+            categories = categories,
+            selectedCategory = selectedCategory,
+            onSelect = component::selectCategory
+        )
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
-            item {
-                Banners()
-            }
-            stickyHeader {
-                Categories(
-                    categories = categories,
-                    selectedCategory = selectedCategory,
-                    onSelect = component::selectCategory
-                )
-            }
             items(
                 count = if (meals.isEmpty()) 5 else 0
             ) {
