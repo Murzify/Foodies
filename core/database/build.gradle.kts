@@ -1,9 +1,9 @@
 plugins {
-    id("gosporttest.android-lib")
-    id("gosporttest.hilt")
+    id("foodies.android-lib")
+    id("foodies.hilt")
 }
 
-android.namespace = "com.murzify.gosporttest.core.database"
+android.namespace = "com.murzify.foodies.core.database"
 
 dependencies {
     implementation(libs.room.runtime)

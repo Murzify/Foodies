@@ -1,10 +1,10 @@
 plugins {
-    id("gosporttest.android-lib")
-    id("gosporttest.hilt")
+    id("foodies.android-lib")
+    id("foodies.hilt")
     alias(libs.plugins.serialization)
 }
 
-android.namespace = "com.murzify.gosporttest.core.network"
+android.namespace = "com.murzify.foodies.core.network"
 
 dependencies {
     implementation(libs.ktor.client.core)

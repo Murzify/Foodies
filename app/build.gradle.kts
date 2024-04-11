@@ -1,6 +1,6 @@
 plugins {
-    id("gosporttest.android-app")
-    id("gosporttest.android-compose")
+    id("foodies.android-app")
+    id("foodies.android-compose")
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.serialization)

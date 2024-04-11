@@ -12,8 +12,8 @@ dependencies {
 gradlePlugin {
     plugins {
         register("hilt") {
-            id = "gosporttest.hilt"
-            implementationClass = "com.murzify.gosporttest.buildlogic.convention.HIltPlugin"
+            id = "foodies.hilt"
+            implementationClass = "com.murzify.foodies.buildlogic.convention.HIltPlugin"
         }
     }
 }

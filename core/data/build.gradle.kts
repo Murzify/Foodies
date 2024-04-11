@@ -1,9 +1,9 @@
 plugins {
-    id("gosporttest.android-lib")
-    id("gosporttest.hilt")
+    id("foodies.android-lib")
+    id("foodies.hilt")
 }
 
-android.namespace = "com.murzify.gosporttest.core.data"
+android.namespace = "com.murzify.foodies.core.data"
 
 dependencies {
     implementation(project(":core:domain"))

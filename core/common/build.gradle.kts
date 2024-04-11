@@ -1,8 +1,8 @@
 plugins {
-    id("gosporttest.android-lib")
+    id("foodies.android-lib")
 }
 
-android.namespace = "com.murzify.gosporttest.core.common"
+android.namespace = "com.murzify.foodies.core.common"
 
 dependencies {
     implementation(libs.decompose)

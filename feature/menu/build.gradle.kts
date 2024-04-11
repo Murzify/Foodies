@@ -1,10 +1,10 @@
 plugins {
-    id("gosporttest.android-lib")
-    id("gosporttest.android-compose")
-    id("gosporttest.hilt")
+    id("foodies.android-lib")
+    id("foodies.android-compose")
+    id("foodies.hilt")
 }
 
-android.namespace = "com.murzify.gosporttest.feature.menu"
+android.namespace = "com.murzify.foodies.feature.menu"
 
 dependencies {
     implementation(project(":core:domain"))

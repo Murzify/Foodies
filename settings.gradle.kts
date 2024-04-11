@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "GoSportTest"
+rootProject.name = "Foodies"
 include(":app")
 include(":core:data")
 include(":core:domain")
