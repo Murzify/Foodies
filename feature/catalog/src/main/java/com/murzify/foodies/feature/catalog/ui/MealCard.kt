@@ -1,4 +1,4 @@
-package com.murzify.foodies.feature.menu.ui
+package com.murzify.foodies.feature.catalog.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

@@ -1,7 +1,7 @@
-package com.murzify.foodies.feature.menu
+package com.murzify.foodies.feature.catalog
 
-import com.murzify.foodies.feature.menu.components.DefaultMenuComponent
-import com.murzify.foodies.feature.menu.components.MenuComponent
+import com.murzify.foodies.feature.catalog.components.DefaultMenuComponent
+import com.murzify.foodies.feature.catalog.components.MenuComponent
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

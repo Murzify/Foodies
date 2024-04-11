@@ -7,8 +7,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":feature:menu"))
 
+    implementation(project(":feature:catalog"))
     implementation(libs.kotlinx.serialization)
 
     implementation(libs.hilt)

@@ -1,4 +1,4 @@
-package com.murzify.foodies.feature.menu.components
+package com.murzify.foodies.feature.catalog.components
 
 import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.ComponentContext
@@ -6,7 +6,7 @@ import com.murzify.foodies.core.common.componentCoroutineScope
 import com.murzify.foodies.core.domain.model.Category
 import com.murzify.foodies.core.domain.model.Meal
 import com.murzify.foodies.core.domain.repository.MealRepository
-import com.murzify.foodies.feature.menu.ui.MenuUi
+import com.murzify.foodies.feature.catalog.ui.MenuUi
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject

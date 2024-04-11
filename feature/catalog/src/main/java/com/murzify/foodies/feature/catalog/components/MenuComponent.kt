@@ -1,4 +1,4 @@
-package com.murzify.foodies.feature.menu.components
+package com.murzify.foodies.feature.catalog.components
 
 import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.ComponentContext

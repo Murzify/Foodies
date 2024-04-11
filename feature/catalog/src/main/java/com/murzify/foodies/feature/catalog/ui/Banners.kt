@@ -1,4 +1,4 @@
-package com.murzify.foodies.feature.menu.ui
+package com.murzify.foodies.feature.catalog.ui
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
