@@ -1,6 +1,5 @@
 package com.murzify.foodies.feature.catalog.ui
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,11 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.murzify.foodies.feature.catalog.components.MenuComponent
+import com.murzify.foodies.feature.catalog.components.CatalogComponent
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-internal fun MenuUi(component: MenuComponent) {
+internal fun CatalogUi(component: CatalogComponent) {
     val categories by component.categories.collectAsState()
     val selectedCategory by component.selectedCategory.collectAsState()
     val meals by component.meals.collectAsState()

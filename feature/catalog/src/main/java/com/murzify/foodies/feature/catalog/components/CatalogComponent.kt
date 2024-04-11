@@ -6,7 +6,7 @@ import com.murzify.foodies.core.domain.model.Category
 import com.murzify.foodies.core.domain.model.Meal
 import kotlinx.coroutines.flow.StateFlow
 
-interface MenuComponent {
+interface CatalogComponent {
 
     val categories: StateFlow<List<Category>>
     val selectedCategory: StateFlow<Category?>
@@ -19,6 +19,6 @@ interface MenuComponent {
     fun Render()
 
     interface Factory {
-        operator fun invoke(componentContext: ComponentContext): MenuComponent
+        operator fun invoke(componentContext: ComponentContext): CatalogComponent
     }
 }

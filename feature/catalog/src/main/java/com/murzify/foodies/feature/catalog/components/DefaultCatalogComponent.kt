@@ -6,7 +6,7 @@ import com.murzify.foodies.core.common.componentCoroutineScope
 import com.murzify.foodies.core.domain.model.Category
 import com.murzify.foodies.core.domain.model.Meal
 import com.murzify.foodies.core.domain.repository.MealRepository
-import com.murzify.foodies.feature.catalog.ui.MenuUi
+import com.murzify.foodies.feature.catalog.ui.CatalogUi
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -15,10 +15,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class DefaultMenuComponent @AssistedInject constructor(
+class DefaultCatalogComponent @AssistedInject constructor(
     @Assisted componentContext: ComponentContext,
     private val mealRepository: MealRepository
-): MenuComponent, ComponentContext by componentContext {
+) : CatalogComponent, ComponentContext by componentContext {
 
     override val categories = MutableStateFlow<List<Category>>(emptyList())
     override val selectedCategory = MutableStateFlow<Category?>(null)
@@ -71,14 +71,14 @@ class DefaultMenuComponent @AssistedInject constructor(
 
     @Composable
     override fun Render() {
-        MenuUi(this)
+        CatalogUi(this)
     }
 
     @AssistedFactory
-    interface Factory : MenuComponent.Factory {
+    interface Factory : CatalogComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext
-        ): DefaultMenuComponent
+        ): DefaultCatalogComponent
     }
 
 }

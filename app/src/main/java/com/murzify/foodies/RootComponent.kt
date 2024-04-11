@@ -3,7 +3,7 @@ package com.murzify.foodies
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
-import com.murzify.foodies.feature.catalog.components.MenuComponent
+import com.murzify.foodies.feature.catalog.components.CatalogComponent
 
 interface RootComponent {
 
@@ -15,6 +15,6 @@ interface RootComponent {
     }
 
     sealed interface Child {
-        data class Menu(val component: MenuComponent) : Child
+        data class Catalog(val component: CatalogComponent) : Child
     }
 }

@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
@@ -40,7 +41,7 @@ internal fun Categories(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
                 .scrollable(rememberScrollState(), orientation = Orientation.Horizontal)
-                .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
+                .padding(start = 8.dp, top = 8.dp, bottom = 8.dp)
                 .background(MaterialTheme.colorScheme.background)
         ) {
             repeat(8) {
@@ -52,7 +53,7 @@ internal fun Categories(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White),
-            contentPadding = PaddingValues(16.dp),
+            contentPadding = PaddingValues(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(categories) { category ->
@@ -73,10 +74,9 @@ private fun CategoryCard(
 ) {
     val backgroundColor = if (selected) MaterialTheme.colorScheme.primaryContainer else Color.White
     val textColor = if (selected) Color.White else Color.Black
-    ElevatedCard(
-        shape = RoundedCornerShape(6.dp),
-        modifier = Modifier.height(32.dp),
-        elevation = CardDefaults.cardElevation(6.dp),
+    Card(
+        shape = RoundedCornerShape(8.dp),
+        modifier = Modifier.height(40.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         onClick = onClick
     ) {
