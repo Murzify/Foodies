@@ -72,7 +72,7 @@ private fun CategoryCard(
     onClick: () -> Unit
 ) {
     val backgroundColor = if (selected) MaterialTheme.colorScheme.primaryContainer else Color.White
-    val textColor = if (selected) MaterialTheme.colorScheme.primary else Color.Gray
+    val textColor = if (selected) Color.White else Color.Black
     ElevatedCard(
         shape = RoundedCornerShape(6.dp),
         modifier = Modifier.height(32.dp),

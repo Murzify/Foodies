@@ -18,13 +18,13 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = MagicPotion,
-    primaryContainer = MagicPotion20,
+    primary = Orange,
+    primaryContainer = Orange,
     secondary = LightGray,
     secondaryContainer = LightGray,
     surfaceTint = Color.Transparent,
-    onSecondaryContainer = MagicPotion,
-    onSurface = MagicPotion,
+    onSecondaryContainer = Orange,
+    onSurface = Orange,
     tertiary = LightGray
 
     /* Other default colors to override
