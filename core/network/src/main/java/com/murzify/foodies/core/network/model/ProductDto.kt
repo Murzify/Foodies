@@ -13,6 +13,8 @@ data class ProductDto(
     val image: String,
     @SerialName("price_current")
     val priceCurrent: Long,
+    @SerialName("price_old")
+    val priceOld: Long?,
     val measure: Int,
     @SerialName("measure_unit")
     val measureUnit: String,

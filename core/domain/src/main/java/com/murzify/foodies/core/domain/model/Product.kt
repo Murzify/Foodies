@@ -10,6 +10,7 @@ data class Product(
     val description: String,
     val image: String,
     val priceCurrent: Long,
+    val priceOld: Long?,
     val measure: Int,
     val measureUnit: String,
     val energy: Float,

@@ -1,21 +1,26 @@
 package com.murzify.foodies.feature.catalog.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.murzify.foodies.feature.catalog.components.CatalogComponent
 
 @Composable
 internal fun CatalogUi(component: CatalogComponent) {
     val categories by component.categories.collectAsState()
     val selectedCategory by component.selectedCategory.collectAsState()
-    val meals by component.products.collectAsState()
+    val filteredProducts by component.filteredProducts.collectAsState(emptyList())
 
     Column {
         CustomToolbar()
@@ -24,21 +29,21 @@ internal fun CatalogUi(component: CatalogComponent) {
             selectedCategory = selectedCategory,
             onSelect = component::selectCategory
         )
-        LazyColumn(
-            modifier = Modifier.fillMaxSize()
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(150.dp),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(
-                count = if (meals.isEmpty()) 5 else 0
-            ) {
-                HorizontalDivider()
-                PlaceHolderMealCard()
-            }
-            items(
-                meals,
+                filteredProducts,
                 key = { it.id }
-            ) { meal ->
-                HorizontalDivider()
-                MealCard(product = meal)
+            ) { product ->
+                Row(
+                    modifier = Modifier.height(IntrinsicSize.Max)
+                ) {
+                    ProductCard(product = product)
+                }
             }
         }
     }

@@ -34,6 +34,7 @@ class DefaultCatalogComponent @AssistedInject constructor(
 
         scope.launch(Dispatchers.IO) {
             categories.value = productsRepository.getCategories()
+            selectedCategory.value = categories.value.first()
         }
 
         scope.launch(Dispatchers.IO) {

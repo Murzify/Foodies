@@ -20,6 +20,7 @@ private val DarkColorScheme = darkColorScheme(
 private val LightColorScheme = lightColorScheme(
     primary = Orange,
     primaryContainer = Orange,
+    surfaceContainerHighest = LightGray,
     secondary = LightGray,
     secondaryContainer = LightGray,
     surfaceTint = Color.Transparent,

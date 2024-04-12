@@ -14,6 +14,7 @@ internal fun ProductDto.toProduct(tags: List<TagDto>) = Product(
     description,
     image,
     priceCurrent,
+    priceOld,
     measure,
     measureUnit,
     energy,
