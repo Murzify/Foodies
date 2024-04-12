@@ -8,7 +8,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.defaultComponentContext
+import com.arkivanov.decompose.ExperimentalDecomposeApi
+import com.arkivanov.decompose.retainedComponent
 import com.murzify.foodies.ui.theme.FoodiesTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -19,6 +20,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var rootComponentFactory: RootComponent.Factory
 
+    @OptIn(ExperimentalDecomposeApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(
@@ -28,7 +30,10 @@ class MainActivity : ComponentActivity() {
             )
         )
 
-        val root = rootComponentFactory(defaultComponentContext())
+
+        val root = retainedComponent { componentContext ->
+            rootComponentFactory(componentContext)
+        }
         setContent {
             FoodiesTheme(
                 darkTheme = false
