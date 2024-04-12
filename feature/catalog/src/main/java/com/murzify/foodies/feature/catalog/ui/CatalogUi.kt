@@ -15,7 +15,7 @@ import com.murzify.foodies.feature.catalog.components.CatalogComponent
 internal fun CatalogUi(component: CatalogComponent) {
     val categories by component.categories.collectAsState()
     val selectedCategory by component.selectedCategory.collectAsState()
-    val meals by component.meals.collectAsState()
+    val meals by component.products.collectAsState()
 
     Column {
         CustomToolbar()
@@ -38,7 +38,7 @@ internal fun CatalogUi(component: CatalogComponent) {
                 key = { it.id }
             ) { meal ->
                 HorizontalDivider()
-                MealCard(meal = meal)
+                MealCard(product = meal)
             }
         }
     }

@@ -1,8 +1,9 @@
 package com.murzify.foodies.core.network.impl
 
-import com.murzify.foodies.core.network.api.TheMealDb
-import com.murzify.foodies.core.network.model.CategoriesDto
-import com.murzify.foodies.core.network.model.MealsDto
+import com.murzify.foodies.core.network.api.WorkTestServer
+import com.murzify.foodies.core.network.model.CategoryDto
+import com.murzify.foodies.core.network.model.ProductDto
+import com.murzify.foodies.core.network.model.TagDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -14,7 +15,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
-class TheMealDbImpl @Inject constructor(): TheMealDb {
+class WorkTestServerImpl @Inject constructor() : WorkTestServer {
 
     private val httpClient = HttpClient {
         install(ContentNegotiation) {
@@ -26,11 +27,13 @@ class TheMealDbImpl @Inject constructor(): TheMealDb {
         }
         defaultRequest {
             contentType(ContentType.Application.Json)
-            url("https://themealdb.com/api/json/v1/1/")
+            url("https://anika1d.github.io/WorkTestServer/")
         }
     }
 
-    override suspend fun search(): MealsDto = httpClient.get("search.php?s").body()
+    override suspend fun products(): List<ProductDto> = httpClient.get("Products.json").body()
 
-    override suspend fun categories(): CategoriesDto = httpClient.get("categories.php").body()
+    override suspend fun categories(): List<CategoryDto> = httpClient.get("Categories.json").body()
+
+    override suspend fun tags(): List<TagDto> = httpClient.get("Tags.json").body()
 }

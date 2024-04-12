@@ -1,7 +1,7 @@
 package com.murzify.foodies.core.network
 
-import com.murzify.foodies.core.network.api.TheMealDb
-import com.murzify.foodies.core.network.impl.TheMealDbImpl
+import com.murzify.foodies.core.network.api.WorkTestServer
+import com.murzify.foodies.core.network.impl.WorkTestServerImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,6 +13,6 @@ abstract class NetworkModule {
 
     @Binds
     abstract fun bindMealDb(
-        theMealDbImpl: TheMealDbImpl
-    ): TheMealDb
+        theMealDbImpl: WorkTestServerImpl
+    ): WorkTestServer
 }

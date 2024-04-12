@@ -15,17 +15,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-import com.murzify.foodies.core.domain.model.Meal
+import com.murzify.foodies.core.domain.model.Product
 import com.valentinilk.shimmer.shimmer
 
 @Composable
-internal fun MealCard(meal: Meal) {
+internal fun MealCard(product: Product) {
     Row(modifier = Modifier.padding(16.dp)) {
         Card(
             modifier = Modifier
@@ -33,24 +31,24 @@ internal fun MealCard(meal: Meal) {
                 .size(135.dp),
 
             ) {
-            AsyncImage(
-                model = meal.thumb,
-                contentDescription = meal.name,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
+//            AsyncImage(
+//                model = product.thumb,
+//                contentDescription = product.name,
+//                modifier = Modifier.fillMaxSize(),
+//                contentScale = ContentScale.Crop
+//            )
         }
         Column(
             modifier = Modifier.height(135.dp)
         ) {
             Text(
-                text = meal.name,
+                text = product.name,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             Text(
-                text = meal.instructions,
+                text = product.description,
                 fontWeight = FontWeight.Light,
                 fontSize = 14.sp,
                 overflow = TextOverflow.Ellipsis,

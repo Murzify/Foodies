@@ -1,40 +1,43 @@
 package com.murzify.foodies.core.data
 
-import com.murzify.foodies.core.database.model.CategoryEntity
-import com.murzify.foodies.core.database.model.MealAndCategory
-import com.murzify.foodies.core.database.model.MealEntity
 import com.murzify.foodies.core.domain.model.Category
-import com.murzify.foodies.core.domain.model.Meal
-import com.murzify.foodies.core.network.model.CategoriesDto
+import com.murzify.foodies.core.domain.model.Product
+import com.murzify.foodies.core.domain.model.Tag
 import com.murzify.foodies.core.network.model.CategoryDto
-import com.murzify.foodies.core.network.model.MealDto
-import com.murzify.foodies.core.network.model.MealsDto
+import com.murzify.foodies.core.network.model.ProductDto
+import com.murzify.foodies.core.network.model.TagDto
 
-internal fun CategoryEntity.toCategory() = Category(id, name)
-
-internal fun List<CategoryEntity>.toCategories() = map { entities -> entities.toCategory() }
-
-internal fun CategoryDto.toEntity() = CategoryEntity(idCategory, strCategory)
-
-internal fun CategoriesDto.toEntities() = categories.map { dto -> dto.toEntity() }
-
-internal fun MealDto.toEntity() = MealEntity(
-    idMeal,
-    strMeal,
-    strCategory,
-    strMealThumb,
-    strInstructions
+internal fun ProductDto.toProduct(tags: List<TagDto>) = Product(
+    id,
+    categoryId,
+    name,
+    description,
+    image,
+    priceCurrent,
+    measure,
+    measureUnit,
+    energy,
+    proteins,
+    fats,
+    carbohydrates,
+    tagIds.toTags(tags)
 )
 
-internal fun MealsDto.toEntities() = meals.map { dto -> dto.toEntity() }
+internal fun List<Int>.toTags(tags: List<TagDto>) = mapNotNull { tagId ->
+    tags.firstOrNull { tag -> tag.id == tagId }?.let { tagDto ->
+        Tag(
+            tagDto.id,
+            tagDto.name
+        )
+    }
+}
 
-internal fun MealAndCategory.toMeal() = Meal(
-    meal.id,
-    meal.name,
-    category.toCategory(),
-    meal.thumb,
-    meal.instructions
-)
+internal fun List<ProductDto>.toProducts(tags: List<TagDto>) = map { productDto ->
+    productDto.toProduct(tags)
+}
 
-internal fun List<MealAndCategory>.toMeals() = map { entities -> entities.toMeal() }
+internal fun List<CategoryDto>.toCategories() = map { categoryDto ->
+    categoryDto.toCategory()
+}
 
+private fun CategoryDto.toCategory() = Category(id, name)

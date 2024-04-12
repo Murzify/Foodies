@@ -11,6 +11,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class NetworkMonitor @Inject constructor(
     @ApplicationContext context: Context
@@ -23,14 +25,13 @@ class NetworkMonitor @Inject constructor(
         .build()
 
 
-    suspend inline fun doOnAvailable(crossinline block: suspend () -> Unit) {
+    suspend fun <T> doOnAvailable(block: suspend () -> T): T = suspendCoroutine { continuation ->
         registerNetworkCallback(
             object : NetworkCallback() {
-                val scope = CoroutineScope(Dispatchers.IO)
                 override fun onAvailable(network: Network) {
                     super.onAvailable(network)
-                    scope.launch {
-                        block()
+                    CoroutineScope(Dispatchers.IO).launch {
+                        continuation.resume(block())
                     }
                     unregisterNetworkCallback(this)
                 }
@@ -38,7 +39,8 @@ class NetworkMonitor @Inject constructor(
         )
     }
 
-    fun registerNetworkCallback(networkCallback: NetworkCallback) {
+
+    private fun registerNetworkCallback(networkCallback: NetworkCallback) {
         connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
     }
 

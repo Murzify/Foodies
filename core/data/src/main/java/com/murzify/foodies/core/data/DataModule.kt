@@ -1,6 +1,6 @@
 package com.murzify.foodies.core.data
 
-import com.murzify.foodies.core.domain.repository.MealRepository
+import com.murzify.foodies.core.domain.repository.ProductsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,6 +12,6 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindMealDbRepository(
-        mealDbRepositoryImpl: MealRepositoryImpl
-    ): MealRepository
+        mealDbRepositoryImpl: ProductsRepositoryImpl
+    ): ProductsRepository
 }
