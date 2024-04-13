@@ -21,6 +21,7 @@ internal fun CatalogUi(component: CatalogComponent) {
     val categories by component.categories.collectAsState()
     val selectedCategory by component.selectedCategory.collectAsState()
     val filteredProducts by component.filteredProducts.collectAsState(emptyList())
+    val cart by component.cart.collectAsState()
 
     Column {
         CustomToolbar()
@@ -42,7 +43,12 @@ internal fun CatalogUi(component: CatalogComponent) {
                 Row(
                     modifier = Modifier.height(IntrinsicSize.Max)
                 ) {
-                    ProductCard(product = product)
+                    ProductCard(
+                        product = product,
+                        cart,
+                        add = { component.addToCart(product) },
+                        remove = { component.removeFromCart(product) }
+                    )
                 }
             }
         }
