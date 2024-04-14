@@ -1,29 +1,23 @@
-package com.murzify.foodies.feature.catalog.components
+package com.murzify.foodies.feature.cart.components
 
 import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.ComponentContext
 import com.murzify.foodies.core.domain.model.Cart
-import com.murzify.foodies.core.domain.model.Category
 import com.murzify.foodies.core.domain.model.Product
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 
-interface CatalogComponent {
+interface CartComponent {
 
-    val categories: StateFlow<List<Category>>
-    val selectedCategory: StateFlow<Category?>
-    val products: StateFlow<List<Product>>
-    val filteredProducts: Flow<List<Product>>
     val cart: StateFlow<Cart>
     val cartSum: Flow<Long>
+    val showOrderButton: Flow<Boolean>
 
-    fun selectCategory(category: Category)
+    fun onNavigationIconClick()
 
     fun addToCart(product: Product)
 
     fun removeFromCart(product: Product)
-
-    fun onCartClick()
 
     @Composable
     fun Render()
@@ -31,7 +25,7 @@ interface CatalogComponent {
     interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
-            navigateToCart: () -> Unit
-        ): CatalogComponent
+            navigateBack: () -> Unit
+        ): CartComponent
     }
 }

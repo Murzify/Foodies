@@ -9,6 +9,7 @@ plugins {
 dependencies {
 
     implementation(project(":feature:catalog"))
+    implementation(project(":feature:cart"))
     implementation(libs.kotlinx.serialization)
 
     implementation(libs.hilt)

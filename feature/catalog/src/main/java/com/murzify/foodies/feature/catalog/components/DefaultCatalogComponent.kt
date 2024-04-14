@@ -3,10 +3,9 @@ package com.murzify.foodies.feature.catalog.components
 import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.ComponentContext
 import com.murzify.foodies.core.common.componentCoroutineScope
-import com.murzify.foodies.core.domain.model.Cart
-import com.murzify.foodies.core.domain.model.CartItem
 import com.murzify.foodies.core.domain.model.Category
 import com.murzify.foodies.core.domain.model.Product
+import com.murzify.foodies.core.domain.repository.CartRepository
 import com.murzify.foodies.core.domain.repository.ProductsRepository
 import com.murzify.foodies.feature.catalog.ui.CatalogUi
 import dagger.assisted.Assisted
@@ -16,12 +15,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class DefaultCatalogComponent @AssistedInject constructor(
     @Assisted componentContext: ComponentContext,
-    private val productsRepository: ProductsRepository
+    @Assisted val navigateToCart: () -> Unit,
+    private val productsRepository: ProductsRepository,
+    private val cartRepository: CartRepository,
 ) : CatalogComponent, ComponentContext by componentContext {
     private val scope = componentContext.componentCoroutineScope()
 
@@ -31,7 +31,7 @@ class DefaultCatalogComponent @AssistedInject constructor(
     override val filteredProducts = combine(selectedCategory, products) { category, products ->
         products.filter { it.categoryId == category?.id }
     }
-    override val cart = MutableStateFlow(Cart(emptyList()))
+    override val cart = cartRepository.cart
     override val cartSum = cart.map { cart ->
         cart.items.fold(0L) { acc, item ->
             acc + item.product.priceCurrent * item.amount
@@ -55,41 +55,15 @@ class DefaultCatalogComponent @AssistedInject constructor(
     }
 
     override fun addToCart(product: Product) {
-        cart.update {
-            val newItems = if (it.items.any { item -> item.product.id == product.id }) {
-                it.items.map { item ->
-                    if (item.product.id == product.id) {
-                        item.copy(amount = item.amount + 1)
-                    } else {
-                        item
-                    }
-                }
-            } else {
-                it.items.toMutableList().apply { add(CartItem(product, 1)) }
-            }
-            it.copy(
-                newItems
-            )
-        }
+        cartRepository.add(product)
     }
 
     override fun removeFromCart(product: Product) {
-        cart.update {
-            val newItems = it.items.mapNotNull { item ->
-                if (item.product.id == product.id) {
-                    if (item.amount == 1) {
-                        null
-                    } else {
-                        item.copy(amount = item.amount - 1)
-                    }
-                } else {
-                    item
-                }
-            }
-            it.copy(
-                newItems
-            )
-        }
+        cartRepository.removeItem(product)
+    }
+
+    override fun onCartClick() {
+        navigateToCart()
     }
 
     @Composable
@@ -100,7 +74,8 @@ class DefaultCatalogComponent @AssistedInject constructor(
     @AssistedFactory
     interface Factory : CatalogComponent.Factory {
         override fun invoke(
-            componentContext: ComponentContext
+            componentContext: ComponentContext,
+            navigateToCart: () -> Unit
         ): DefaultCatalogComponent
     }
 

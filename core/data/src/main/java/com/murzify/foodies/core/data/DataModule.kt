@@ -1,5 +1,6 @@
 package com.murzify.foodies.core.data
 
+import com.murzify.foodies.core.domain.repository.CartRepository
 import com.murzify.foodies.core.domain.repository.ProductsRepository
 import dagger.Binds
 import dagger.Module
@@ -11,7 +12,12 @@ import dagger.hilt.components.SingletonComponent
 abstract class DataModule {
 
     @Binds
-    abstract fun bindMealDbRepository(
-        mealDbRepositoryImpl: ProductsRepositoryImpl
+    abstract fun bindProductRepository(
+        productsRepositoryImpl: ProductsRepositoryImpl
     ): ProductsRepository
+
+    @Binds
+    abstract fun bindCartRepository(
+        cartRepositoryImpl: CartRepositoryImpl
+    ): CartRepository
 }

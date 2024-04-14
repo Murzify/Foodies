@@ -7,8 +7,11 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.value.Value
+import com.murzify.foodies.feature.cart.components.CartComponent
 import com.murzify.foodies.feature.catalog.components.CatalogComponent
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -17,7 +20,8 @@ import kotlinx.serialization.Serializable
 
 class DefaultRootComponent @AssistedInject constructor(
     @Assisted componentContext: ComponentContext,
-    val catalogComponentFactory: CatalogComponent.Factory
+    val catalogComponentFactory: CatalogComponent.Factory,
+    val cartComponentFactory: CartComponent.Factory
 ) : RootComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
@@ -25,8 +29,9 @@ class DefaultRootComponent @AssistedInject constructor(
     private val stack: Value<ChildStack<Config, RootComponent.Child>> = childStack(
         source = navigation,
         serializer = Config.serializer(),
-        initialConfiguration = Config.Menu,
-        childFactory = ::child
+        initialConfiguration = Config.Catalog,
+        childFactory = ::child,
+        handleBackButton = true
     )
 
     @Composable
@@ -39,8 +44,17 @@ class DefaultRootComponent @AssistedInject constructor(
         config: Config,
         componentContext: ComponentContext
     ) = when (config) {
-        Config.Menu -> RootComponent.Child.Catalog(
-            catalogComponentFactory(componentContext)
+        Config.Catalog -> RootComponent.Child.Catalog(
+            catalogComponentFactory(
+                componentContext,
+                navigateToCart = {
+                    navigation.bringToFront(Config.Cart)
+                }
+            )
+        )
+
+        Config.Cart -> RootComponent.Child.Cart(
+            cartComponentFactory(componentContext, navigateBack = navigation::pop)
         )
     }
 
@@ -55,7 +69,9 @@ class DefaultRootComponent @AssistedInject constructor(
     private sealed interface Config {
 
         @Serializable
-        data object Menu : Config
+        data object Catalog : Config
+
+        data object Cart : Config
     }
 
 }
