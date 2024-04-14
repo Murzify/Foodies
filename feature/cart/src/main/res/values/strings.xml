@@ -2,4 +2,5 @@
 <resources>
     <string name="cart_title">Корзина</string>
     <string name="order">Заказать за</string>
+    <string name="cart_is_empty">Пусто, выберите блюда\nв каталоге :)</string>
 </resources>

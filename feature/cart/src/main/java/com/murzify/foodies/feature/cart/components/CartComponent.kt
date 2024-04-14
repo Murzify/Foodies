@@ -12,6 +12,7 @@ interface CartComponent {
     val cart: StateFlow<Cart>
     val cartSum: Flow<Long>
     val showOrderButton: Flow<Boolean>
+    val cartIsEmpty: Flow<Boolean>
 
     fun onNavigationIconClick()
 

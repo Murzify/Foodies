@@ -22,6 +22,7 @@ class DefaultCartComponent @AssistedInject constructor(
         }
     }
     override val showOrderButton = cartSum.map { it > 0 }
+    override val cartIsEmpty = cart.map { it.items.isEmpty() }
 
 
     override fun onNavigationIconClick() {
