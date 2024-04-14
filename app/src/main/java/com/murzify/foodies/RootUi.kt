@@ -22,6 +22,7 @@ internal fun RootUi(
             when (val instance = it.instance) {
                 is RootComponent.Child.Catalog -> instance.component.Render()
                 is RootComponent.Child.Cart -> instance.component.Render()
+                is RootComponent.Child.ProductDetails -> instance.component.Render()
             }
         }
     }

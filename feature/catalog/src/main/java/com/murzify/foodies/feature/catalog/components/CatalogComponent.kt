@@ -25,13 +25,16 @@ interface CatalogComponent {
 
     fun onCartClick()
 
+    fun onProductClick(product: Product)
+
     @Composable
     fun Render()
 
     interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
-            navigateToCart: () -> Unit
+            navigateToCart: () -> Unit,
+            navigateToDetails: (Product) -> Unit
         ): CatalogComponent
     }
 }

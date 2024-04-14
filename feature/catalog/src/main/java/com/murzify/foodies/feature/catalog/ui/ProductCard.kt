@@ -1,6 +1,7 @@
 package com.murzify.foodies.feature.catalog.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -39,11 +40,14 @@ internal fun ProductCard(
     product: Product,
     cart: Cart,
     add: () -> Unit,
-    remove: () -> Unit
+    remove: () -> Unit,
+    onClick: () -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(8),
-        modifier = Modifier.aspectRatio(0.5f),
+        modifier = Modifier
+            .aspectRatio(0.5f)
+            .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
             contentColor = Color.Black

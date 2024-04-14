@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="weight">Вес</string>
+    <string name="energy">Энерг. ценность</string>
+    <string name="proteins">Белки</string>
+    <string name="fats">Жиры</string>
+    <string name="carbohydrates">Углеводы</string>
+
+    <string name="kcal">%1$s ккал</string>
+    <string name="gram">%1$s г</string>
+
+    <string name="add_to_cart">В корзину за</string>
+</resources>

@@ -11,8 +11,10 @@ import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.value.Value
+import com.murzify.foodies.core.domain.model.Product
 import com.murzify.foodies.feature.cart.components.CartComponent
 import com.murzify.foodies.feature.catalog.components.CatalogComponent
+import com.murzify.foodies.feature.productdetails.components.ProductDetailsComponent
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -21,7 +23,8 @@ import kotlinx.serialization.Serializable
 class DefaultRootComponent @AssistedInject constructor(
     @Assisted componentContext: ComponentContext,
     val catalogComponentFactory: CatalogComponent.Factory,
-    val cartComponentFactory: CartComponent.Factory
+    val cartComponentFactory: CartComponent.Factory,
+    val productDetailsComponentFactory: ProductDetailsComponent.Factory
 ) : RootComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
@@ -49,12 +52,26 @@ class DefaultRootComponent @AssistedInject constructor(
                 componentContext,
                 navigateToCart = {
                     navigation.bringToFront(Config.Cart)
+                },
+                navigateToDetails = { product ->
+                    navigation.bringToFront(Config.ProductDetails(product))
                 }
             )
         )
 
         Config.Cart -> RootComponent.Child.Cart(
             cartComponentFactory(componentContext, navigateBack = navigation::pop)
+        )
+
+        is Config.ProductDetails -> RootComponent.Child.ProductDetails(
+            productDetailsComponentFactory(
+                componentContext,
+                product = config.product,
+                navigateBack = navigation::pop,
+                navigateToCart = {
+                    navigation.bringToFront(Config.Cart)
+                }
+            )
         )
     }
 
@@ -71,7 +88,10 @@ class DefaultRootComponent @AssistedInject constructor(
         @Serializable
         data object Catalog : Config
 
+        @Serializable
         data object Cart : Config
+
+        data class ProductDetails(val product: Product) : Config
     }
 
 }

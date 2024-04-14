@@ -8,8 +8,10 @@ plugins {
 
 dependencies {
 
+    implementation(project(":core:domain"))
     implementation(project(":feature:catalog"))
     implementation(project(":feature:cart"))
+    implementation(project(":feature:productdetails"))
     implementation(libs.kotlinx.serialization)
 
     implementation(libs.hilt)

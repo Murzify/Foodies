@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 import com.murzify.foodies.feature.cart.components.CartComponent
 import com.murzify.foodies.feature.catalog.components.CatalogComponent
+import com.murzify.foodies.feature.productdetails.components.ProductDetailsComponent
 
 interface RootComponent {
 
@@ -19,5 +20,7 @@ interface RootComponent {
         data class Catalog(val component: CatalogComponent) : Child
 
         data class Cart(val component: CartComponent) : Child
+
+        data class ProductDetails(val component: ProductDetailsComponent) : Child
     }
 }

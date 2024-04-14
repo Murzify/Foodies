@@ -64,7 +64,10 @@ internal fun CatalogUi(component: CatalogComponent) {
                         product = product,
                         cart,
                         add = { component.addToCart(product) },
-                        remove = { component.removeFromCart(product) }
+                        remove = { component.removeFromCart(product) },
+                        onClick = {
+                            component.onProductClick(product)
+                        }
                     )
                 }
             }

@@ -19,7 +19,8 @@ import kotlinx.coroutines.launch
 
 class DefaultCatalogComponent @AssistedInject constructor(
     @Assisted componentContext: ComponentContext,
-    @Assisted val navigateToCart: () -> Unit,
+    @Assisted("cart") private val navigateToCart: () -> Unit,
+    @Assisted("details") private val navigateToDetails: (Product) -> Unit,
     private val productsRepository: ProductsRepository,
     private val cartRepository: CartRepository,
 ) : CatalogComponent, ComponentContext by componentContext {
@@ -66,6 +67,10 @@ class DefaultCatalogComponent @AssistedInject constructor(
         navigateToCart()
     }
 
+    override fun onProductClick(product: Product) {
+        navigateToDetails(product)
+    }
+
     @Composable
     override fun Render() {
         CatalogUi(this)
@@ -75,7 +80,8 @@ class DefaultCatalogComponent @AssistedInject constructor(
     interface Factory : CatalogComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext,
-            navigateToCart: () -> Unit
+            @Assisted("cart") navigateToCart: () -> Unit,
+            @Assisted("details") navigateToDetails: (Product) -> Unit
         ): DefaultCatalogComponent
     }
 

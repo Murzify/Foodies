@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.murzify.foodies.feature.cart.R
+import com.murzify.foodies.core.ui.R as UiR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,7 +32,7 @@ internal fun Toolbar(onBackClick: () -> Unit) {
                 onClick = onBackClick
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_arrow_left),
+                    painter = painterResource(id = UiR.drawable.ic_arrow_left),
                     contentDescription = "back",
                 )
             }
