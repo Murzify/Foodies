@@ -7,9 +7,12 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -36,6 +39,7 @@ fun FixedPriceButton(
             onClick = onClick,
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier
+                .windowInsetsPadding(WindowInsets.navigationBars)
                 .padding(vertical = 12.dp, horizontal = 16.dp)
                 .fillMaxWidth()
                 .height(48.dp),

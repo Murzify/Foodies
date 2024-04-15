@@ -1,6 +1,5 @@
 package com.murzify.foodies.feature.cart.ui
 
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,6 +36,5 @@ internal fun Toolbar(onBackClick: () -> Unit) {
                 )
             }
         },
-        windowInsets = WindowInsets(0, 0, 0, 0)
     )
 }

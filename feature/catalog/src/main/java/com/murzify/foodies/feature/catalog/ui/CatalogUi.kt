@@ -8,25 +8,33 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.murzify.foodies.core.ui.FixedPriceButton
 import com.murzify.foodies.feature.catalog.components.CatalogComponent
 import com.murzify.foodies.feature.menu.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun CatalogUi(component: CatalogComponent) {
     val categories by component.categories.collectAsState()
@@ -35,9 +43,9 @@ internal fun CatalogUi(component: CatalogComponent) {
     val cart by component.cart.collectAsState()
     val cartSum by component.cartSum.collectAsState(initial = 0L)
     val showPlaceholder by component.showPlaceholder.collectAsState(initial = true)
-
-    Column {
-        CustomToolbar()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    Column(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)) {
+        Toolbar(scrollBehavior)
         Categories(
             categories = categories,
             selectedCategory = selectedCategory,
@@ -79,6 +87,13 @@ internal fun CatalogUi(component: CatalogComponent) {
                     }
                 }
             }
+            item {
+                Spacer(
+                    Modifier.windowInsetsBottomHeight(
+                        WindowInsets.systemBars
+                    )
+                )
+            }
 
         }
     }
@@ -101,7 +116,6 @@ internal fun CatalogUi(component: CatalogComponent) {
             )
         }
     }
-
 
 }
 

@@ -5,12 +5,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -83,7 +88,13 @@ internal fun ProductDetailsUi(component: ProductDetailsComponent) {
             valueUnitId = R.string.gram
         )
         HorizontalDivider()
-        Spacer(modifier = Modifier.height(88.dp))
+        Spacer(
+            modifier = Modifier
+                .height(88.dp)
+                .windowInsetsBottomHeight(
+                    WindowInsets.systemBars
+                )
+        )
     }
 
     Box(
@@ -106,6 +117,7 @@ internal fun ProductDetailsUi(component: ProductDetailsComponent) {
         onClick = component::onBackClick,
         shape = RoundedCornerShape(50),
         modifier = Modifier
+            .windowInsetsPadding(WindowInsets.statusBars)
             .padding(16.dp)
             .size(44.dp),
         contentPadding = PaddingValues(10.dp),

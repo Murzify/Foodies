@@ -1,7 +1,5 @@
 package com.murzify.foodies
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
@@ -14,19 +12,15 @@ internal fun RootUi(
     childStack: ChildStack<*, RootComponent.Child>,
     modifier: Modifier,
 ) {
-    Scaffold(
+    Children(
         modifier = modifier,
-    ) { paddingValues ->
-        Children(
-            stack = childStack,
-            modifier = Modifier.padding(paddingValues),
-            animation = stackAnimation(fade())
-        ) {
-            when (val instance = it.instance) {
-                is RootComponent.Child.Catalog -> instance.component.Render()
-                is RootComponent.Child.Cart -> instance.component.Render()
-                is RootComponent.Child.ProductDetails -> instance.component.Render()
-            }
+        stack = childStack,
+        animation = stackAnimation(fade())
+    ) {
+        when (val instance = it.instance) {
+            is RootComponent.Child.Catalog -> instance.component.Render()
+            is RootComponent.Child.Cart -> instance.component.Render()
+            is RootComponent.Child.ProductDetails -> instance.component.Render()
         }
     }
 }
