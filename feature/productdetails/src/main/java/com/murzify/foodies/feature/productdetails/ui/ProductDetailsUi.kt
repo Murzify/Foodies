@@ -1,7 +1,6 @@
 package com.murzify.foodies.feature.productdetails.ui
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -91,18 +90,16 @@ internal fun ProductDetailsUi(component: ProductDetailsComponent) {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
-        Box(modifier = Modifier.background(Color.White)) {
-            FixedPriceButton(
-                price = product.priceCurrent,
-                prefix = {
-                    Text(
-                        text = stringResource(id = R.string.add_to_cart),
-                        modifier = Modifier.padding(end = 4.dp)
-                    )
-                },
-                onClick = component::onAddToCartClick
-            )
-        }
+        FixedPriceButton(
+            price = product.priceCurrent,
+            prefix = {
+                Text(
+                    text = stringResource(id = R.string.add_to_cart),
+                    modifier = Modifier.padding(end = 4.dp)
+                )
+            },
+            onClick = component::onAddToCartClick
+        )
     }
 
     ElevatedButton(
