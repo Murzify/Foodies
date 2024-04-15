@@ -47,7 +47,7 @@ internal fun ProductCard(
     onClick: () -> Unit
 ) {
     Card(
-        shape = RoundedCornerShape(8),
+        shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .aspectRatio(0.5f)
             .clickable(onClick = onClick),
@@ -56,10 +56,13 @@ internal fun ProductCard(
             contentColor = Color.Black
         )
     ) {
-        Image(
-            painter = painterResource(id = com.murzify.foodies.core.ui.R.drawable.product),
-            contentDescription = ""
-        )
+        Box {
+            Image(
+                painter = painterResource(id = com.murzify.foodies.core.ui.R.drawable.product),
+                contentDescription = ""
+            )
+            ProductTags(tags = product.tags)
+        }
 
         Column(
             modifier = Modifier
