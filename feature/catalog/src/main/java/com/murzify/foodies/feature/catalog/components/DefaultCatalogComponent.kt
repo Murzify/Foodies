@@ -38,6 +38,9 @@ class DefaultCatalogComponent @AssistedInject constructor(
             acc + item.product.priceCurrent * item.amount
         }
     }
+    override val showPlaceholder = combine(categories, products) { categories, products ->
+        categories.isEmpty() || products.isEmpty()
+    }
 
     init {
         scope.launch(Dispatchers.IO) {

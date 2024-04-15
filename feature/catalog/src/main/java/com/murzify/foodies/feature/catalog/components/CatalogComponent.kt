@@ -16,6 +16,7 @@ interface CatalogComponent {
     val filteredProducts: Flow<List<Product>>
     val cart: StateFlow<Cart>
     val cartSum: Flow<Long>
+    val showPlaceholder: Flow<Boolean>
 
     fun selectCategory(category: Category)
 

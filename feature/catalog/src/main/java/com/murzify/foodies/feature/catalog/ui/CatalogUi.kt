@@ -34,12 +34,14 @@ internal fun CatalogUi(component: CatalogComponent) {
     val filteredProducts by component.filteredProducts.collectAsState(emptyList())
     val cart by component.cart.collectAsState()
     val cartSum by component.cartSum.collectAsState(initial = 0L)
+    val showPlaceholder by component.showPlaceholder.collectAsState(initial = true)
 
     Column {
         CustomToolbar()
         Categories(
             categories = categories,
             selectedCategory = selectedCategory,
+            showPlaceholder = showPlaceholder,
             onSelect = component::selectCategory
         )
         LazyVerticalGrid(
@@ -53,24 +55,31 @@ internal fun CatalogUi(component: CatalogComponent) {
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            items(
-                filteredProducts,
-                key = { it.id }
-            ) { product ->
-                Row(
-                    modifier = Modifier.height(IntrinsicSize.Max)
-                ) {
-                    ProductCard(
-                        product = product,
-                        cart,
-                        add = { component.addToCart(product) },
-                        remove = { component.removeFromCart(product) },
-                        onClick = {
-                            component.onProductClick(product)
-                        }
-                    )
+            if (showPlaceholder) {
+                items(10) {
+                    ProductPlaceholder()
+                }
+            } else {
+                items(
+                    filteredProducts,
+                    key = { it.id }
+                ) { product ->
+                    Row(
+                        modifier = Modifier.height(IntrinsicSize.Max)
+                    ) {
+                        ProductCard(
+                            product = product,
+                            cart,
+                            add = { component.addToCart(product) },
+                            remove = { component.removeFromCart(product) },
+                            onClick = {
+                                component.onProductClick(product)
+                            }
+                        )
+                    }
                 }
             }
+
         }
     }
 

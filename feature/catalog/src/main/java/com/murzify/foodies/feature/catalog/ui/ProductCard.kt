@@ -1,8 +1,10 @@
 package com.murzify.foodies.feature.catalog.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -32,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import com.murzify.foodies.core.domain.model.Cart
 import com.murzify.foodies.core.domain.model.Product
 import com.murzify.foodies.core.ui.ProductCounter
+import com.valentinilk.shimmer.shimmer
 import java.text.NumberFormat
 import java.util.Currency
 
@@ -98,6 +101,26 @@ internal fun ProductCard(
             }
         }
 
+    }
+}
+
+@Composable
+fun ProductPlaceholder() {
+    Card(
+        shape = RoundedCornerShape(8),
+        modifier = Modifier
+            .aspectRatio(0.5f),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = Color.Black
+        )
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .shimmer()
+                .background(Color.LightGray)
+        )
     }
 }
 

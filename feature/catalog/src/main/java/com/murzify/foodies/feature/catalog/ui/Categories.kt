@@ -34,9 +34,10 @@ import com.valentinilk.shimmer.shimmer
 internal fun Categories(
     categories: List<Category>,
     selectedCategory: Category?,
+    showPlaceholder: Boolean,
     onSelect: (Category) -> Unit
 ) {
-    if (categories.isEmpty()) {
+    if (showPlaceholder) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
