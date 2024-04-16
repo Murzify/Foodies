@@ -2,8 +2,6 @@ package com.murzify.foodies.core.data
 
 import com.murzify.foodies.core.domain.model.Cart
 import com.murzify.foodies.core.domain.model.CartItem
-import com.murzify.foodies.core.domain.model.Product
-import com.murzify.foodies.core.domain.model.Tag
 import com.murzify.foodies.core.domain.repository.CartRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -14,22 +12,6 @@ import org.junit.Test
 class CartRepositoryTest {
     private lateinit var cartRepository: CartRepository
 
-    private val fakeProduct = Product(
-        1L,
-        2L,
-        "test",
-        "test test",
-        "1.jpg",
-        2000L,
-        5000L,
-        33,
-        "г",
-        20.54f,
-        13.4f,
-        56.3f,
-        12.6f,
-        tags = listOf(Tag(1, "Discount"))
-    )
     private val fakeCartItem = CartItem(fakeProduct, 1)
     private val fakeCart = Cart(items = listOf(fakeCartItem))
 
