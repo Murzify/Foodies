@@ -2,6 +2,7 @@ plugins {
     id("foodies.android-lib")
     id("foodies.android-compose")
     id("foodies.hilt")
+    id("foodies.unit-test")
     alias(libs.plugins.serialization)
 }
 
@@ -17,8 +18,4 @@ dependencies {
 
     implementation(libs.decompose)
     implementation(libs.decompose.extensions)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }
