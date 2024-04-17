@@ -32,7 +32,7 @@ class CartRepositoryImpl @Inject constructor() : CartRepository {
         }
     }
 
-    override fun removeItem(product: Product) {
+    override fun remove(product: Product) {
         cart.update {
             val newItems = it.items.mapNotNull { item ->
                 if (item.product.id == product.id) {

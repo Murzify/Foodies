@@ -63,7 +63,7 @@ class DefaultCatalogComponent @AssistedInject constructor(
     }
 
     override fun removeFromCart(product: Product) {
-        cartRepository.removeItem(product)
+        cartRepository.remove(product)
     }
 
     override fun onCartClick() {

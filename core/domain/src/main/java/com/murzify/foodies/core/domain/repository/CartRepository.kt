@@ -15,6 +15,6 @@ interface CartRepository {
     /**
      * Remove one item from the cart
      */
-    fun removeItem(product: Product)
+    fun remove(product: Product)
 
 }

@@ -34,7 +34,7 @@ class DefaultCartComponent @AssistedInject constructor(
     }
 
     override fun removeFromCart(product: Product) {
-        cartRepository.removeItem(product)
+        cartRepository.remove(product)
     }
 
     @Composable
