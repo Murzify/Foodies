@@ -55,7 +55,7 @@ class CartRepositoryTest {
         val items = initialCart.items.toMutableList()
         items.remove(fakeCartItem)
         val emptyCart = initialCart.copy(items = items)
-        cartRepository.removeItem(fakeProduct)
+        cartRepository.remove(fakeProduct)
         val actual = cartRepository.cart.first()
         Assert.assertEquals(emptyCart, actual)
     }
@@ -78,7 +78,7 @@ class CartRepositoryTest {
             }
         )
 
-        cartRepository.removeItem(fakeProduct)
+        cartRepository.remove(fakeProduct)
         val actual = cartRepository.cart.first()
 
         Assert.assertEquals(decrementedCart, actual)
